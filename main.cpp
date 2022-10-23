@@ -8,14 +8,15 @@
 
 namespace {
     using namespace cocos2d;
+    using namespace gd;
 
-    std::vector<std::pair<gd::StartPosObject*, CCPoint>> startPoses;
+    std::vector<std::pair<StartPosObject*, CCPoint>> startPoses;
     std::ptrdiff_t startPosIndex;
     CCLabelBMFont* startPosText;
 
-    class ModPlayLayer : gd::PlayLayer {
+    class ModPlayLayer : PlayLayer {
         public:
-            bool _init(gd::GJGameLevel* lvl) {
+            bool _init(GJGameLevel* lvl) {
                 startPosIndex = -1;
                 startPoses.clear();
 
@@ -79,16 +80,16 @@ namespace {
                 resetLevel();
 
                 if (m_isPaused) {
-                    gd::GameSoundManager::sharedState()->stopBackgroundMusic();
+                    GameSoundManager::sharedState()->stopBackgroundMusic();
                 }
             }
-            void addObject(gd::GameObject* game) {
+            void addObject(GameObject* game) {
                 matdash::orig<&ModPlayLayer::addObject>(this, game);
                 
                 if (game->m_nObjectID == 31) {
                     game->retain();
 
-                    startPoses.push_back({reinterpret_cast<gd::StartPosObject*>(game), game->getPosition()});
+                    startPoses.push_back({reinterpret_cast<StartPosObject*>(game), game->getPosition()});
                     startPosIndex++;
 
                     auto label = std::format("StartPos {}/{}", 
@@ -109,7 +110,7 @@ namespace {
     };
 
 
-    class ModUILayer : gd::UILayer {
+    class ModUILayer : UILayer {
         public:
             void _keyDown(cocos2d::enumKeyCodes key) {
                 auto pModPlayLayer = reinterpret_cast<ModPlayLayer*>(gd::PlayLayer::get());
@@ -122,10 +123,10 @@ namespace {
             }
     };
 
-    class ModPauseLayer : gd::PauseLayer {
+    class ModPauseLayer : PauseLayer {
         public:
             void _keyDown(cocos2d::enumKeyCodes key) {
-                auto pModPlayLayer = reinterpret_cast<ModPlayLayer*>(gd::PlayLayer::get());
+                auto pModPlayLayer = reinterpret_cast<ModPlayLayer*>(PlayLayer::get());
 
                 matdash::orig<&ModPauseLayer::_keyDown>(this, key);
                 
