@@ -20,17 +20,16 @@ namespace {
                 startPosIndex = -1;
                 startPoses.clear();
 
-                auto corner = CCDirector::sharedDirector()->getScreenTop();
+                auto win_size = CCDirector::sharedDirector()->getWinSize();
 
-                startPosText = CCLabelBMFont::create("StartPos 0/0", "bigFont.fnt");
+                startPosText = CCLabelBMFont::create("0/0", "bigFont.fnt");
 
                 auto result = matdash::orig<&ModPlayLayer::_init>(this, lvl);
 
-                startPosText->setPosition(5, corner - 25);
-                startPosText->setScale(0.4f);
-                startPosText->setAnchorPoint({0, 0.5f});
-                startPosText->setOpacity(50);
-                startPosText->setZOrder(0x2021AF);
+                startPosText->setPosition(win_size.width / 2, 15);
+                startPosText->setScale(0.5f);
+                startPosText->setOpacity(70);
+                startPosText->setZOrder(0x7FFFFFFF);
 
                 startPosText->setVisible(!startPoses.empty());
 
@@ -51,21 +50,19 @@ namespace {
                     startPosIndex = startPoses.size() - 1;
                 }
 
-                auto colorPulseBegin = CCTintTo::create(0.0, 0, 255, 0);
-                auto colorPulseEnd = CCTintTo::create(0.5, 255, 255, 255);
+                auto opacityPulseBegin = CCFadeTo::create(0.0f, 255);
+                auto opacityPulseHold = CCFadeTo::create(1.0f, 255);
+                auto opacityPulseEnd = CCFadeTo::create(0.5f, 70);
 
-                auto opacityPulseBegin = CCFadeTo::create(0.0, 255);
-                auto opacityPulseEnd = CCFadeTo::create(0.5, 50);
+                auto opacityPulseActions = CCArray::create(opacityPulseBegin, opacityPulseHold, opacityPulseEnd, nullptr);
 
-                auto label = std::format("StartPos {}/{}", 
+                auto label = std::format("{}/{}", 
                                 std::to_string(startPosIndex + 1), 
                                 std::to_string(startPoses.size())
                             );
 
                 startPosText->setString(label.c_str());
-
-                startPosText->runAction(CCSequence::create(colorPulseBegin, colorPulseEnd, nullptr));
-                startPosText->runAction(CCSequence::create(opacityPulseBegin, opacityPulseEnd, nullptr));
+                startPosText->runAction(CCSequence::create(opacityPulseActions));
 
                 m_startPosCheckpoint = nullptr;
 
@@ -92,7 +89,7 @@ namespace {
                     startPoses.push_back({reinterpret_cast<StartPosObject*>(game), game->getPosition()});
                     startPosIndex++;
 
-                    auto label = std::format("StartPos {}/{}", 
+                    auto label = std::format("{}/{}", 
                                 std::to_string(startPosIndex + 1), 
                                 std::to_string(startPoses.size())
                             );
