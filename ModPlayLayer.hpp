@@ -1,11 +1,10 @@
 #pragma once
 
-#include <format>
-
+#include <cocos2d.h>
 #include <gd.h>
 
 #include "switcher.hpp"
-#include "MenuMods.hpp"
+#include "mods.hpp"
 
 using namespace gd;
 using namespace cocos2d;
@@ -26,7 +25,7 @@ class ModPlayLayer final : PlayLayer {
 
             auto result = matdash::orig<&ModPlayLayer::_init>(this, lvl);
 
-            switcher::text->setVisible(!switcher::startPoses.empty() && MenuMods.toogle && !(MenuMods.hideInterface));
+            switcher::text->setVisible(!switcher::startPoses.empty() && mods::toogle && !(mods::hideInterface));
 
             addChild(switcher::text);
 
@@ -60,13 +59,15 @@ class ModPlayLayer final : PlayLayer {
 
             auto opacityPulseActions = CCArray::create(opacityPulseBegin, opacityPulseHold, opacityPulseEnd, nullptr);
 
-            auto label = std::format("{}/{}", 
+            if(switcher::text) {
+                auto label = std::format("{}/{}", 
                             std::to_string(switcher::index + 1), 
                             std::to_string(switcher::startPoses.size())
                         );
 
-            switcher::text->setString(label.c_str());
-            switcher::text->runAction(CCSequence::create(opacityPulseActions));
+                switcher::text->setString(label.c_str());
+                switcher::text->runAction(CCSequence::create(opacityPulseActions));
+            }
 
             m_startPosCheckpoint = nullptr;
 
@@ -93,12 +94,14 @@ class ModPlayLayer final : PlayLayer {
                 switcher::startPoses.push_back({reinterpret_cast<StartPosObject*>(game), game->getPosition()});
                 switcher::index++;
 
-                auto label = std::format("{}/{}", 
+                if(switcher::text) {
+                    auto label = std::format("{}/{}", 
                             std::to_string(switcher::index + 1), 
                             std::to_string(switcher::startPoses.size())
                         );
-                switcher::text->setString(label.c_str());
-
+                    switcher::text->setString(label.c_str());
+                }
+                
                 game->release();
             }
 

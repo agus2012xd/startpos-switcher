@@ -5,7 +5,7 @@
 #include "ModPlayLayer.hpp"
 
 #include "switcher.hpp"
-#include "MenuMods.hpp"
+#include "mods.hpp"
 
 using namespace gd;
 using namespace cocos2d;
@@ -17,8 +17,8 @@ class ModPauseLayer final : PauseLayer {
 
             matdash::orig<&ModPauseLayer::_keyDown>(this, key);
             
-            if ((key == switcher::keyBinds[0] || key == switcher::keyBinds[1]) && MenuMods.toogle) {
-                if (!MenuMods.switchOnDeath) {
+            if ((key == switcher::keyBinds[0] || key == switcher::keyBinds[1]) && mods::toogle) {
+                if (!mods::switchOnDeath) {
                     pModPlayLayer->updateIndex(key == switcher::keyBinds[1]);
                 }
                 else {

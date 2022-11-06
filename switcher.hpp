@@ -8,14 +8,14 @@ using namespace gd;
 using namespace cocos2d;
 
 namespace switcher {
-    std::vector<std::pair<StartPosObject*, CCPoint>> startPoses = {};
-    std::array keyBinds = {KEY_Left, KEY_Right};
+    extern std::vector<std::pair<StartPosObject*, CCPoint>> startPoses;
+    extern std::array<enumKeyCodes, 2> keyBinds;
 
-    std::ptrdiff_t index = 0;
+    extern std::ptrdiff_t index;
 
-    CCLabelBMFont* text = nullptr;
+    extern CCLabelBMFont* text;
 
-    bool direction;
+    extern bool direction;
     
-    bool toSwitch = false;
+    extern bool toSwitch;
 }

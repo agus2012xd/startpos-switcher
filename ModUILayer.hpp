@@ -4,7 +4,7 @@
 
 #include "ModPlayLayer.hpp"
 
-#include "MenuMods.hpp"
+#include "mods.hpp"
 #include "switcher.hpp"
 
 using namespace gd;
@@ -17,8 +17,8 @@ class ModUILayer final : UILayer {
 
             matdash::orig<&ModUILayer::_keyDown>(this, key);
             
-            if ((key == switcher::keyBinds[0] || key == switcher::keyBinds[1]) && MenuMods.toogle) {
-                if (!MenuMods.switchOnDeath) {
+            if ((key == switcher::keyBinds[0] || key == switcher::keyBinds[1]) && mods::toogle) {
+                if (!mods::switchOnDeath) {
                     pModPlayLayer->updateIndex(key == switcher::keyBinds[1]);
                 }
                 else {
