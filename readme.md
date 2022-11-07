@@ -4,6 +4,7 @@
   <li>Switch On Death</li>
   <li>Hide Interface</li>
   <li>Use A/D Keybinds</li>
+  <li>Use Arrows</li>
 </ul>
 <h2>Installation</h2>
 
