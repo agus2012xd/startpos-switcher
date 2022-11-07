@@ -15,7 +15,26 @@ namespace switcher {
 
     extern CCLabelBMFont* text;
 
+    extern CCSprite* leftArrow;
+    extern CCSprite* rightArrow;
+
+    extern CCMenuItemSpriteExtra* leftArrowButton;
+    extern CCMenuItemSpriteExtra* rightArrowButton;
+
     extern bool direction;
     
     extern bool toSwitch;
+
+    extern bool isInMenu;
+
+    extern bool isCreated;
+    
+    void switchStartPos(PlayLayer* game);
+
+    void updateIndex(bool increment);
+
+    struct Callbacks {
+        void leftArrowButtonCallback(CCObject* obj);
+        void rightArrowButtonCallback(CCObject* obj);
+    };
 }

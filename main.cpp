@@ -12,7 +12,7 @@ void mod_main(HMODULE hModule) {
     matdash::add_hook<&ModPlayLayer::_init, matdash::CallConv::Thiscall>(gd::base + 0x1FB780);
     matdash::add_hook<&ModPlayLayer::resetLevel, matdash::CallConv::Thiscall>(gd::base + 0x20BF00);
     matdash::add_hook<&ModPlayLayer::addObject, matdash::CallConv::Thiscall>(gd::base + 0x2017E0);
-    matdash::add_hook<&ModPlayLayer::destroyPlayer, matdash::CallConv::Thiscall>(gd::base + 0x20A1A0);
+    matdash::add_hook<&ModPlayLayer::onQuit, matdash::CallConv::Thiscall>(gd::base + 0x20D810);
 
     matdash::add_hook<&ModUILayer::_keyDown, matdash::CallConv::Thiscall>(gd::base + 0x25f890);
     matdash::add_hook<&ModPauseLayer::_keyDown, matdash::CallConv::Thiscall>(gd::base + 0x1E6580);

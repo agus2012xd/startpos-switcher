@@ -5,6 +5,10 @@
 
 #include "gdhm_main.hpp"
 
+#include <cocos2d.h>
+
+using namespace cocos2d;
+
 void _header(void) {
     auto setKeybinds = [](void) {
         if (mods::useAD) {
@@ -13,9 +17,13 @@ void _header(void) {
         else switcher::keyBinds = {KEY_Left, KEY_Right};
     };
 
-    auto onToogle = [&setKeybinds](void) {
-        if(switcher::text) {
-            switcher::text->setVisible((!mods::hideInterface) && mods::toogle && (!switcher::startPoses.empty()));
+    auto onToogle = [](void) {
+        if(switcher::isCreated){
+            if(switcher::isInMenu == false) {
+                switcher::text->setVisible((!mods::hideInterface) && mods::toogle && !(switcher::startPoses.empty()));
+                switcher::leftArrowButton->setVisible((!mods::hideInterface) && mods::toogle && !(switcher::startPoses.empty()) && mods::useArrows);
+                switcher::rightArrowButton->setVisible((!mods::hideInterface) && mods::toogle && !(switcher::startPoses.empty()) && mods::useArrows);
+            }
         }
     };
 
@@ -53,7 +61,17 @@ void _header(void) {
         gdhm::new_id,
         "Switch On Death",
         &mods::switchOnDeath
-        );
+    );
+
+    gdhm::gui::checkbox (
+        gdhm::new_id,
+        "Use Arrows",
+        &mods::useArrows,
+        nullptr,
+        onToogle,
+        "",
+        onToogle
+    );
 }
 
 void _footer(void) {

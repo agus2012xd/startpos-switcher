@@ -5,4 +5,5 @@ namespace mods {
     extern bool useAD;
     extern bool hideInterface;
     extern bool switchOnDeath;
+    extern bool useArrows;
 }
