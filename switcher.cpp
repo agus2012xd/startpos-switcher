@@ -23,11 +23,6 @@ bool switcher::isCreated = false;
 
 namespace {
     void pulseObjects(void) {
-        /*
-        auto opacityPulseBegin = CCFadeTo::create(0.0f, 255);
-        auto opacityPulseHold = CCFadeTo::create(1.0f, 255);
-        auto opacityPulseEnd = CCFadeTo::create(0.5f, 70);
-        */
 
         switcher::leftArrow->runAction(CCSequence::create(CCFadeTo::create(0.0f, 255), CCFadeTo::create(1.0f, 255), CCFadeTo::create(0.5f, 70), nullptr));
         switcher::rightArrow->runAction(CCSequence::create(CCFadeTo::create(0.0f, 255), CCFadeTo::create(1.0f, 255), CCFadeTo::create(0.5f, 70), nullptr));
