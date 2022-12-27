@@ -39,8 +39,6 @@ void mod_main(HMODULE hModule) {
     matdash::add_hook<&ModUILayer::_keyDown, matdash::CallConv::Thiscall>(gd::base + 0x25f890);
     matdash::add_hook<&ModPauseLayer::_keyDown, matdash::CallConv::Thiscall>(gd::base + 0x1E6580);
 
-    matdash::enable_hooks();
-
     if (gdhm::is_loaded()) {
         gdhm::gui::window (
             "StartPos Switcher", 
