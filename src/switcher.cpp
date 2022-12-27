@@ -47,7 +47,7 @@ void switcher::switchStartPos(PlayLayer* game) {
         game->m_playerStartPosition = switcher::startPoses[switcher::index].second;
     }
 
-    //game->resetLevel();
+    game->resetLevel();
 
     if (game->m_bIsPaused) {
         GameSoundManager::sharedState()->stopBackgroundMusic();
