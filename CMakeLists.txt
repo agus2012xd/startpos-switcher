@@ -16,7 +16,7 @@ add_subdirectory("libs/gd.h")
 add_subdirectory("libs/mat-dash")
 add_subdirectory("libs/json")
 
-file(GLOB_RECURSE STARTPOS_SWITCHER_SOURCES "src/*.cpp" "src/*.hpp")
+file(GLOB_RECURSE STARTPOS_SWITCHER_SOURCES "src/*.cpp")
 
 add_library(${PROJ} SHARED ${STARTPOS_SWITCHER_SOURCES})
 
