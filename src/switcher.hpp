@@ -5,8 +5,6 @@
 #include <array>
 #include <cstddef>
 
-#include "mods.hpp"
-
 using namespace gd;
 using namespace cocos2d;
 

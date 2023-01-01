@@ -1,4 +1,11 @@
-#include "GDHMMain.hpp"
+#include <fstream>
+
+#include <nlohmann/json.hpp>
+#include <gdhm.hpp>
+#include <cocos2d.h>
+
+#include "mods.hpp"
+#include "switcher.hpp"
 
 #define CHECKBOX(name, value, onActivate) \
     gdhm::gui::checkbox ( \
