@@ -7,7 +7,7 @@ set(JSON_BuildTests OFF CACHE INTERNAL "")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project(${PROJ} VERSION 0.51 DESCRIPTION "Startpos Switcher" LANGUAGES CXX)
+project(${PROJ} VERSION 0.52 DESCRIPTION "Startpos Switcher" LANGUAGES CXX)
 
 add_subdirectory("libs/minhook")
 add_subdirectory("libs/GDHM-API")
