@@ -9,6 +9,6 @@
 #include <matdash.hpp>
 #include <gdhm.hpp>
 
-#include "gdhm_main.hpp"
+#include "GDHMMain.hpp"
 #include "mods.hpp"
 #include "ModLayers.hpp"

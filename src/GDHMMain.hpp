@@ -9,5 +9,5 @@
 #include "mods.hpp"
 #include "switcher.hpp"
 
-void _header(void);
-void _footer(void);
+void GDHMHeader(void);
+void GDHMFooter(void);

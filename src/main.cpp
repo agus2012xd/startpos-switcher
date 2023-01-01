@@ -44,9 +44,9 @@ void mod_main(HMODULE hModule) {
             "StartPos Switcher", 
             "", 
             nullptr, 
-            [](void){}, 
-            _header,
-            _footer
+            [](void) {}, 
+            GDHMHeader,
+            GDHMFooter
         );
     }
 }

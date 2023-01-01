@@ -1,5 +1,4 @@
 #include "switcher.hpp"
-#include "mods.hpp"
 
 using namespace gd;
 using namespace cocos2d;
