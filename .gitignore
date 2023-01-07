@@ -10,6 +10,7 @@ compile_commands.json
 CTestTestfile.cmake
 .vscode/*
 .vscode
+.cache
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
