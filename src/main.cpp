@@ -53,9 +53,6 @@ void mod_main(HMODULE hModule) {
     matdash::add_hook<&ModMenuLayer::onMoreGames>(gd::base + 0x1919C0);
 
     if (gdhm::is_loaded()) {
-        mods::toogle = false;
-        mods::useArrows = false;
-        
         gdhm::gui::window (
             "StartPos Switcher", 
             "", 
