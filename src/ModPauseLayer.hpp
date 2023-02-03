@@ -10,7 +10,7 @@
 using namespace gd;
 using namespace cocos2d;
 
-class ModPauseLayer final : PauseLayer {
+class ModPauseLayer final {
     public:
         void _keyDown(enumKeyCodes key) {
             auto pPlayLayer = PlayLayer::get();

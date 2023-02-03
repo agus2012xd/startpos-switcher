@@ -18,9 +18,9 @@ CPMAddPackage(
   GITHUB_REPOSITORY TheLartians/Ccache.cmake
   VERSION 1.2.4)
 CPMAddPackage(
-    NAME minhook
-    GITHUB_REPOSITORY TsudaKageyu/minhook
-    GIT_TAG 49d03ad)
+    NAME minhook-dll
+    GITHUB_REPOSITORY zaphir-code/minhook-dll
+    GIT_TAG e5a011f)
 CPMAddPackage(
     NAME mat-dash
     GITHUB_REPOSITORY zaphir-code/mat-dash
@@ -46,4 +46,4 @@ file(GLOB_RECURSE StartposSwitcher_SOURCES "src/*.cpp")
 
 add_library(${PROJ} SHARED ${StartposSwitcher_SOURCES})
 
-target_link_libraries(${PROJ} cocos2d minhook gdhm mat-dash gd_h nlohmann_json::nlohmann_json)
+target_link_libraries(${PROJ} cocos2d minhook-dll gdhm mat-dash gd_h nlohmann_json::nlohmann_json)
