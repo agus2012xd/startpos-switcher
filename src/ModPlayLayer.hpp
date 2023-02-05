@@ -2,63 +2,49 @@
 
 #include <cocos2d.h>
 #include <gd.h>
-
 #include <matdash.hpp>
-
 #include <Windows.h>
 
-#include "switcher.hpp"
 #include "mods.hpp"
+#include "switcher.hpp"
+
+USING_NS_CC;
 
 using namespace gd;
-using namespace cocos2d;
 
 class ModPlayLayer final : PlayLayer {
     public:
         bool _init(GJGameLevel* lvl) {
             switcher::index = -1;
             switcher::startPoses.clear();
-
             switcher::isInMenu = false;
             switcher::isCreated = true;
-
-            auto win_size = CCDirector::sharedDirector()->getWinSize();
-
             switcher::text = CCLabelBMFont::create("0/0", "bigFont.fnt");
-            switcher::text->setPosition(win_size.width / 2, 15);
+            auto visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+            switcher::text->setPosition(visibleSize.width / 2, 15);
             switcher::text->setScale(0.5f);
             switcher::text->setOpacity(70);
             switcher::text->setZOrder(0x7FFFFFFF);
-
             switcher::leftArrow = CCSprite::createWithSpriteFrameName("GJ_arrow_03_001.png");
             switcher::leftArrow->setScale(0.5f);
             switcher::leftArrow->setOpacity(70);
-
             switcher::rightArrow = CCSprite::createWithSpriteFrameName("GJ_arrow_03_001.png");
             switcher::rightArrow->setScale(0.5f);
             switcher::rightArrow->setOpacity(70);
             switcher::rightArrow->setFlipX(true);
-
             auto result = matdash::orig<&ModPlayLayer::_init>(this, lvl);
-
             switcher::leftArrowButton = CCMenuItemSpriteExtra::create(switcher::leftArrow, this, menu_selector(switcher::Callbacks::leftArrowButtonCallback));
             switcher::leftArrowButton->setPosition(ccp(-30, 0));
-
             switcher::rightArrowButton = CCMenuItemSpriteExtra::create(switcher::rightArrow, this, menu_selector(switcher::Callbacks::rightArrowButtonCallback));
             switcher::rightArrowButton->setPosition(ccp(30, 0));
-
             auto menu = CCMenu::create();
-
             menu->addChild(switcher::leftArrowButton);
             menu->addChild(switcher::rightArrowButton);
-            menu->setPosition(ccp(((win_size.width / 2)), 15));
+            menu->setPosition(ccp(((visibleSize.width / 2)), 15));
             menu->setZOrder(0x7FFFFFFF);
-
             switcher::text->setVisible(!switcher::startPoses.empty() && mods::toogle && !(mods::hideInterface));
-
             switcher::leftArrowButton->setVisible((!switcher::startPoses.empty() && mods::toogle && !(mods::hideInterface) && mods::useArrows));
             switcher::rightArrowButton->setVisible((!switcher::startPoses.empty() && mods::toogle && !(mods::hideInterface) && mods::useArrows));
-
             addChild(switcher::text);
             addChild(menu);
 

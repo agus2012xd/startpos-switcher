@@ -1,15 +1,17 @@
 #include <filesystem>
 #include <fstream>
 
-#include <nlohmann/json.hpp>
+#include <gdhm.hpp>
 #include <matdash/minhook.hpp>
 #include <matdash/boilerplate.hpp>
 #include <matdash.hpp>
-#include <gdhm.hpp>
+#undef isnan
+#undef snprintf
+#include <nlohmann/json.hpp>
 
 #include "GDHMMain.hpp"
-#include "mods.hpp"
 #include "ModLayers.hpp"
+#include "mods.hpp"
 
 using nlohmann::json;
 
@@ -18,12 +20,10 @@ void mod_main(HMODULE hModule) {
 
     if(std::filesystem::exists(".startpos_switcher/settings.json")) {
         json j = {};
-
         std::ifstream fs(".startpos_switcher/settings.json");
 
         if(fs.is_open()) {
             fs >> j;
-
             mods::toogle = j["Toogle"].get<bool>();
             mods::useAD = j["Use A/D Keybinds"].get<bool>();
             mods::hideInterface = j["Hide Interface"].get<bool>();
@@ -46,10 +46,8 @@ void mod_main(HMODULE hModule) {
     matdash::add_hook<&ModPlayLayer::resetLevel, matdash::CallConv::Thiscall>(gd::base + 0x20BF00);
     matdash::add_hook<&ModPlayLayer::addObject, matdash::CallConv::Thiscall>(gd::base + 0x2017E0);
     matdash::add_hook<&ModPlayLayer::onQuit, matdash::CallConv::Thiscall>(gd::base + 0x20D810);
-
     matdash::add_hook<&ModUILayer::_keyDown, matdash::CallConv::Thiscall>(gd::base + 0x25F890);
     matdash::add_hook<&ModPauseLayer::_keyDown, matdash::CallConv::Thiscall>(gd::base + 0x1E6580);
-
     matdash::add_hook<&ModMenuLayer::onMoreGames>(gd::base + 0x1919C0);
 
     if (gdhm::is_loaded()) {

@@ -1,8 +1,10 @@
 #include <fstream>
 
-#include <nlohmann/json.hpp>
-#include <gdhm.hpp>
 #include <cocos2d.h>
+#include <gdhm.hpp>
+#undef isnan
+#undef snprintf
+#include <nlohmann/json.hpp>
 
 #include "mods.hpp"
 #include "switcher.hpp"
@@ -18,13 +20,13 @@
         onActivate \
     )
 
-using namespace cocos2d;
+USING_NS_CC;
+
 using nlohmann::json;
 
 void GDHMHeader(void) {
     auto updateJson = [](void) {
         json j = {};
-
         std::fstream fs(".startpos_switcher/settings.json", std::ios::in | std::ios::out);
 
         if(fs.is_open()) {
@@ -32,7 +34,6 @@ void GDHMHeader(void) {
         }
 
         fs.close();
-
         fs.open(".startpos_switcher/settings.json", std::ios::out | std::ios::trunc);
 
         if(fs.is_open()) {
@@ -41,7 +42,6 @@ void GDHMHeader(void) {
             j["Hide Interface"] = mods::hideInterface;
             j["Switch On Death"] = mods::switchOnDeath;
             j["Use Arrows"] = mods::useArrows;
-
             fs << j;
         }
 
@@ -71,7 +71,6 @@ void GDHMHeader(void) {
 
     setKeybinds();
     onToogle();
-
     CHECKBOX("Toogle", &mods::toogle, onToogle);
     CHECKBOX("Use A/D Keybinds", &mods::useAD, setKeybinds);
     CHECKBOX("Hide Interface", &mods::hideInterface, onToogle);

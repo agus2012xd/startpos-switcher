@@ -2,36 +2,28 @@
 
 #include "mods.hpp"
 
+USING_NS_CC;
+
 using namespace gd;
-using namespace cocos2d;
 
 std::vector<std::pair<StartPosObject*, CCPoint>> switcher::startPoses = {};
 std::array<enumKeyCodes, 2> switcher::keyBinds = {KEY_Left, KEY_Right};
-
 std::ptrdiff_t switcher::index = 0;
-
 CCLabelBMFont* switcher::text = nullptr;
-
 CCSprite* switcher::leftArrow = nullptr;
 CCSprite* switcher::rightArrow = nullptr;
-
 CCMenuItemSpriteExtra* switcher::leftArrowButton = nullptr;
 CCMenuItemSpriteExtra* switcher::rightArrowButton = nullptr;
-
 bool switcher::isInMenu = false;
 bool switcher::isCreated = false;
 
-
 namespace {
     void pulseObjects(void) {
-
         switcher::leftArrow->runAction(CCSequence::create(CCFadeTo::create(0.0f, 255), CCFadeTo::create(1.0f, 255), CCFadeTo::create(0.5f, 70), nullptr));
         switcher::rightArrow->runAction(CCSequence::create(CCFadeTo::create(0.0f, 255), CCFadeTo::create(1.0f, 255), CCFadeTo::create(0.5f, 70), nullptr));
-
         switcher::text->runAction(CCSequence::create(CCFadeTo::create(0.0f, 255), CCFadeTo::create(1.0f, 255), CCFadeTo::create(0.5f, 70), nullptr));
     }
 }
-
 
 void switcher::switchStartPos(PlayLayer* game) {
     switcher::toSwitch = false;
@@ -69,13 +61,11 @@ void switcher::updateIndex(bool increment) {
                     std::to_string(switcher::index + 1), 
                     std::to_string(switcher::startPoses.size())
     );
-    
     switcher::text->setString(label.c_str());
     pulseObjects();
 }
 
 bool switcher::direction;
-
 bool switcher::toSwitch = false;
 
 void switcher::Callbacks::leftArrowButtonCallback(CCObject* obj) {

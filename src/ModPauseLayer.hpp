@@ -3,12 +3,12 @@
 #include <gd.h>
 
 #include "ModPlayLayer.hpp"
-
-#include "switcher.hpp"
 #include "mods.hpp"
+#include "switcher.hpp"
+
+USING_NS_CC;
 
 using namespace gd;
-using namespace cocos2d;
 
 class ModPauseLayer final {
     public:
