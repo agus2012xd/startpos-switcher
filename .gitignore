@@ -19,3 +19,5 @@ CTestTestfile.cmake
 .history/
 *.vsix
 build
+StartPosSwitcher/
+StartPosSwitcher.zip
